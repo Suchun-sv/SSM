@@ -20,7 +20,9 @@ public class TestSSM {
         User user = new User();
         user.setUsername("小猪佩奇");
         user.setPassword("000");
-        user_dao.saveUser(user);
+//        user_dao.saveUser(user);
+        System.out.println(user_dao.findByName("abc"));
+
     }
 
 }
