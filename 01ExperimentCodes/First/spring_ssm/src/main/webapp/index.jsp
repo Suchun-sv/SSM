@@ -59,9 +59,10 @@
 <div class="container">
     <div class="row row-centered">
         <div class="well col-md-6 col-centered">
-            <h2>欢迎登录</h2>
+            <h2 >欢迎登录</h2>
             <%--      <form action="/spring/login" method="post" role="form">--%>
-            <form id="fm" role="form" action="user/login" method="post">
+<%--            <form id="fm" role="form" action="user/login" method="post">--%>
+            <form id="fm" method="post">
                 <div class="input-group input-group-md">
                     <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
                     <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户ID"/>
@@ -73,13 +74,14 @@
                 </div>
                 <input type="hidden" id="is_remembered" name="is_remembered" placeholder="cookie用" value="0">
                 <br/>
-                <button type="submit" id="Submit" class="btn btn-success btn-block">登录</button>
+                <button  id="Submit" type="button" class="btn btn-success btn-block">登录</button>
                 <label>
                 <input type="checkbox"  id="saveUsername">保存用户名
                 </label>
                 <label>
                     <input type="checkbox"  id="savePassword">保存密码
                 </label>
+                <h5 id="result" style="color: crimson"></h5>
             </form>
         </div>
     </div>
@@ -91,22 +93,24 @@
 <%--<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>--%>
 <%--<script src="js/jquery.md5.js"></script>--%>
 
-<%--<script>--%>
-<%--    $("#Submit").click(function () {--%>
-<%--        $.ajax({--%>
-<%--            type: "POST",   //提交的方法--%>
-<%--            url:"/spring/login", //提交的地址--%>
-<%--            data:$('#fm').serialize(),// 序列化表单值--%>
-<%--            async: true,--%>
-<%--            error: function(request) {  //失败的话--%>
-<%--                alert("Connection error");--%>
-<%--            },--%>
-<%--            success: function(data) {  //成功--%>
-<%--                alert(data);  //就将返回的数据显示出来--%>
-<%--            }--%>
-<%--        });--%>
-<%--    });--%>
-<%--</script>--%>
+<script>
+    $("#Submit").click(function () {
+        $.ajax({
+            type: "POST",   //提交的方法
+            url:"user/login", //提交的地址
+            data:$('#fm').serialize(),// 序列化表单值
+            async: true ,
+            error: function(request) {  //失败的话
+                alert("Connection error");
+            },
+            success: function(data) {  //成功
+                $("#result").text(data);//就将返回的数据显示出来
+                alert(data);
+                // window.location.reload();
+            }
+        });
+    });
+</script>
 <script>
 $("#saveUsername").change(function(){
 if($("#saveUsername").prop("checked")){
@@ -137,6 +141,7 @@ $.cookie("username","",{ expires:-1 });
         else
         {
             $("#is_remembered").val(0);
+            $.cookie("remPassword", false);
             $.cookie("remPassword","false",{expires:-1});
             $.cookie("password","",{ expires:-1 });
         }
