@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <listener>
+        <listener-class>com.servlet.SpringContextListener</listener-class>
+    </listener>
+
+    <context-param>
+        <param-name>contextLocation</param-name>
+        <param-value>classpath*:applicationContext.xml</param-value>
+    </context-param>
+
+
+<!--    如果有动作:或者是超链接或者是表单提示或者是js，总之一定有路径到当前-->
+<!--    文件中找到<url-pattern>/这里叫什么</url-pattern>，程序一定到当前-->
+<!--    servlet-mapping（映射）标签中找到servlet-name对应servlet标签中的-->
+<!--    servlet-name名称,然后一定找到对应的Servlet的全路径名称servlet-class-->
+<!--    根据java的反射机制tomcat会自动找到实际存在的Servlet类，-->
+<!--    如果是超链接提交一定到Servlet类中doGet()方法，如果是-->
+<!--    表单以post方式提交一定到Servlet类中doPost()方法 &ndash;&gt;-->
+<!--    <servlet>-->
+<!--        <servlet-name>suibian</servlet-name>-->
+<!--        <servlet-class>com.heu.gjg.servlet.UserServlet</servlet-class>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>suibian</servlet-name>-->
+<!--        <url-pattern>/user</url-pattern>-->
+<!--    </servlet-mapping>-->
+
+    <!-- 任何项目首次运行一定会检查当前核心控制器或核心配置文件
+    如果当前文件中有路径错误一定在控制台出现很多异常代码，如果没有问题
+    一定执行到以下的欢迎文件列表中的从第一个列表开始搜索直到找到合适的路径 -->
+    <welcome-file-list>
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list>
+
+</web-app>

@@ -81,6 +81,7 @@
                 <label>
                     <input type="checkbox"  id="savePassword">保存密码
                 </label>
+                <a href="./user/registerPage" style="text-align: right;alignment: right;padding-left: 32rem">注册</a>
                 <h5 id="result" style="color: crimson"></h5>
             </form>
         </div>
@@ -99,13 +100,12 @@
             type: "POST",   //提交的方法
             url:"user/login", //提交的地址
             data:$('#fm').serialize(),// 序列化表单值
-            async: true ,
-            error: function(request) {  //失败的话
+            async: true,
+            error: function(data) {  //失败的话
                 alert("Connection error");
             },
-            success: function(data) {  //成功
-                $("#result").text(data);//就将返回的数据显示出来
-                alert(data);
+            success: function(url) {  //成功
+                window.location.href = url;
                 // window.location.reload();
             }
         });
